@@ -1,7 +1,7 @@
-Database(DatabaseId(primary), DatabaseName)
+Dataset(DatabaseId(primary), DatasetName)
 
-Feature(FeatureId(primary), DatabaseId(foreign), Feature_Name)
-*DatabaseId references Database
+Feature(FeatureId(primary), DatasetId(foreign), Feature_Name)
+*DatasetId references Dataset
 
 InputData(DataGroupId, FeatureId(foreign), Value)
 *FeatureId references Feature
