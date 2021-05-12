@@ -1,4 +1,9 @@
 Database(DatabaseId(primary), DatabaseName)
-Feature(FeatureId(primary), DatabaseId(foriegn), Feature_Name)
+
+Feature(FeatureId(primary), DatabaseId(foreign), Feature_Name)
+*DatabaseId references Database
+
 InputData(DataGroupId, FeatureId(foreign), Value)
+*FeatureId references Feature
+
 Label(DataGroupId, LabelData, UpVotes)
