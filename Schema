@@ -1,9 +1,17 @@
-Dataset(DatabaseId(primary), DatasetName)
+Table: Dataset(DatabaseId(primary), DatasetName)
+This table contains ids for the individual datasets the users will create. It's the highest level table and each table will use it's features. DatabaseID
+is the primary key and is a unique identifier for each dataset and DatasetName is the name of that dataset.
 
-Feature(FeatureId(primary), DatasetId(foreign), Feature_Name)
+
+Table: Feature(FeatureId(primary), DatasetId(foreign), Feature_Name)
 *DatasetId references Dataset
+This table represents features found in each dataset. The FeatureID is a unique key for each feature and the Feature_name is the name of the feature. 
 
-InputData(DataGroupId, FeatureId(foreign), Value)
+Table: InputData(DataGroupId, FeatureId(foreign), Value)
 *FeatureId references Feature
+This table represents the actual data point a user uploads. The DataGroupID field is for grouping data points and the FeatureID is for specifying which feature the
+data point represents. The value is the actual value of that particular datapoint. 
 
-Label(DataGroupId, LabelData, UpVotes)
+Table: Label(DataGroupId, LabelData, UpVotes)
+Each datagroup gets a label and that's what this table represents. The label data is the particular label for that datagroup and the upvotes is how many net total 
+upvotes the users have given that label. 
