@@ -4,10 +4,12 @@ import com.example.CommunityDataSetBuilder.DAO.InputDataRepository;
 import com.example.CommunityDataSetBuilder.Models.InputData;
 import com.example.CommunityDataSetBuilder.Models.Label;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@Controller
 @RequestMapping(path="/input-data")
 public class InputDataController {
     @Autowired
@@ -15,29 +17,29 @@ public class InputDataController {
 
     @PostMapping(path="/create") // Map ONLY POST Requests
     public @ResponseBody
-    String AddInputData (@RequestParam int featureId, @RequestParam String data) {
+    String AddInputData (@RequestParam String featureId, @RequestParam String data) {
 
         InputData inputData = new InputData();
         inputData.featureId = featureId;
-        inputData.data = data;
+        inputData.dataValue = data;
         inputDataRepository.save(inputData);
         return "Created";
     }
 
     @GetMapping(path="/{id}")
     public @ResponseBody
-    Optional<InputData> GetById (@RequestParam int id) {
+    Optional<InputData> GetById (@RequestParam String id) {
         return inputDataRepository.findById(id);
     }
 
     @PostMapping(path="/update") // Map ONLY POST Requests
-    public @ResponseBody String UpdateInputData (@RequestParam int id, @RequestParam int featureId, @RequestParam String data) {
+    public @ResponseBody String UpdateInputData (@RequestParam String id, @RequestParam String featureId, @RequestParam String data) {
 
         Optional<InputData> inputData = inputDataRepository.findById(id);
         if (inputData.isPresent()) {
             InputData s = inputData.get();
             s.featureId = featureId;
-            s.data = data;
+            s.dataValue = data;
             inputDataRepository.save(s);
             return "Updated";
         }
@@ -52,18 +54,18 @@ public class InputDataController {
 
     @GetMapping(path="/by-feature/{id}")
     public @ResponseBody
-    Optional<InputData> GetByFeatureId (@RequestParam int id) {
+    Optional<InputData> GetByFeatureId (@RequestParam String id) {
         return inputDataRepository.findByFeatureId(id);
     }
 
     @GetMapping(path="/by-group/{id}")
     public @ResponseBody
-    Optional<InputData> GetByDataGroupId (@RequestParam int id) {
+    Optional<InputData> GetByDataGroupId (@RequestParam String id) {
         return inputDataRepository.findByDataGroupId(id);
     }
 
     @DeleteMapping(path="/delete/{id}")
-    public @ResponseBody String DeleteById(@RequestParam int id) {
+    public @ResponseBody String DeleteById(@RequestParam String id) {
         inputDataRepository.deleteById(id);
         return "Deleted";
     }

@@ -2,27 +2,44 @@ package com.example.CommunityDataSetBuilder.Models;
 
 import javax.persistence.Id;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 
+/**
+ * Represents a feature, "Feature" is a class of data, e.g. air pressure, humidity for a predictive weather model
+ */
 @Entity
 public class Feature {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    public int Id;
-    public int datasetId;
-    public String name;
+    public String featureId;
+    public String datasetId;
+    public String featureName;
 
     public Feature() {
     }
 
-    public Feature(int id) {
-        Id = id;
+    public Feature(String id) {
+
+        this.featureId = id;
     }
 
-    public Feature(int id, int datasetId, String name) {
-        Id = id;
+    /**
+     * Constructor for adding to the DB
+     * @param datasetId the foreign key for dataset
+     * @param featureName the name for the feature
+     */
+    public Feature(String datasetId, String featureName) {
         this.datasetId = datasetId;
-        this.name = name;
+        this.featureName = featureName;
+    }
+
+    /**
+     * Constructor for reading from the DB
+     * @param id primary key
+     * @param datasetId the foreign key for dataset
+     * @param featureName the name for the feature
+     */
+    public Feature(String id, String datasetId, String featureName) {
+        this.featureId = id;
+        this.datasetId = datasetId;
+        this.featureName = featureName;
     }
 }

@@ -2,17 +2,18 @@ package com.example.CommunityDataSetBuilder.Models;
 
 import javax.persistence.Id;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 
+/**
+ * Representation of Label. "Label" is what the classification/prediction of the model should be.
+ * Also belongs to a data group.
+ */
 @Entity
 public class Label {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     public int id;
-    public int dataGroupId;
-    public String data;
+    public String dataGroupId;
+    public String labelData;
     public int upVotes;
 
     public Label() {
@@ -22,21 +23,33 @@ public class Label {
         this.id = id;
     }
 
-    public Label(int id, String data) {
-        this.id = id;
-        this.data = data;
+    public Label(String labelData) {
+        this.labelData = labelData;
     }
 
-    public Label(int id, String data, int upVotes) {
+    public Label(int id, String labelData) {
         this.id = id;
-        this.data = data;
+        this.labelData = labelData;
+    }
+
+
+    public Label(String labelData, int upVotes) {
+        this.labelData = labelData;
         this.upVotes = upVotes;
     }
 
-    public Label(int id, int dataGroupId, String data, int upVotes) {
+
+
+    public Label(int id, String labelData, int upVotes) {
+        this.id = id;
+        this.labelData = labelData;
+        this.upVotes = upVotes;
+    }
+
+    public Label(int id, String dataGroupId, String labelData, int upVotes) {
         this.id = id;
         this.dataGroupId = dataGroupId;
-        this.data = data;
+        this.labelData = labelData;
         this.upVotes = upVotes;
     }
 }

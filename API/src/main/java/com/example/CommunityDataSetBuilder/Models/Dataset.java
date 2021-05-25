@@ -5,23 +5,38 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
+/**
+ * Representation of Dataset, which is the main grouping of data to be labeled
+ */
 @Entity
 public class Dataset {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    public int id;
+    public String datasetId;
 
-    public String name;
+    public String datasetName;
 
+    /**
+     * Basic constructor
+     */
     public Dataset() {
     }
 
-    public Dataset(int id) {
-        this.id = id;
+    /**
+     * Constructor to create new entry in DB
+     * @param datasetName the name for the dataset
+     */
+    public Dataset(String datasetName) {
+        this.datasetName = datasetName;
     }
 
-    public Dataset(int id, String name) {
-        this.id = id;
-        this.name = name;
+
+    /**
+     * The constructor for reading dataset data from the DB
+     * @param DatasetId the primary key
+     * @param DatasetName the name of the dataset
+     */
+    public Dataset(String DatasetId, String DatasetName) {
+        this.datasetId = DatasetId;
+        this.datasetName = DatasetName;
     }
 }

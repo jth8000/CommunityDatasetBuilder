@@ -5,6 +5,9 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface FeatureRepository extends CrudRepository<Feature, Integer> {
-    Optional<Feature> findByDatasetId(int datasetId);
+/**
+ * Interface that queries Features
+ */
+public interface FeatureRepository extends CrudRepository<Feature, String> {
+    Optional<Feature> findByDatasetId(String datasetId);
 }
