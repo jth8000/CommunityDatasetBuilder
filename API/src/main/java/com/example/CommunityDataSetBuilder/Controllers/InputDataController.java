@@ -2,12 +2,13 @@ package com.example.CommunityDataSetBuilder.Controllers;
 
 import com.example.CommunityDataSetBuilder.DAO.InputDataRepository;
 import com.example.CommunityDataSetBuilder.Models.InputData;
+import com.example.CommunityDataSetBuilder.Models.Label;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
+@RequestMapping(path="/input-data")
 public class InputDataController {
     @Autowired
     private InputDataRepository inputDataRepository;
@@ -23,9 +24,35 @@ public class InputDataController {
         return "Created";
     }
 
+    @GetMapping(path="/{id}")
+    public @ResponseBody
+    Optional<InputData> GetById (@RequestParam int id) {
+        return inputDataRepository.findById(id);
+    }
+
+    @PostMapping(path="/update") // Map ONLY POST Requests
+    public @ResponseBody String UpdateInputData (@RequestParam int id, @RequestParam int featureId, @RequestParam String data) {
+
+        Optional<InputData> inputData = inputDataRepository.findById(id);
+        if (inputData.isPresent()) {
+            InputData s = inputData.get();
+            s.featureId = featureId;
+            s.data = data;
+            inputDataRepository.save(s);
+            return "Updated";
+        }
+        return "Not found";
+    }
+
     @GetMapping(path="/all")
     public @ResponseBody Iterable<InputData> GetAllInputData() {
         // This returns a JSON or XML with the users
         return inputDataRepository.findAll();
+    }
+
+    @DeleteMapping(path="/delete/{id}")
+    public @ResponseBody String DeleteById(@RequestParam int id) {
+        inputDataRepository.deleteById(id);
+        return "Deleted";
     }
 }

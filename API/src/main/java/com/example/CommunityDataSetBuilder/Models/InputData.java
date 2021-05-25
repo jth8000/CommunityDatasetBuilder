@@ -1,10 +1,15 @@
 package com.example.CommunityDataSetBuilder.Models;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 
+@Entity
 public class InputData {
 
     @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     public int id;
     public int featureId;
     public String data;
