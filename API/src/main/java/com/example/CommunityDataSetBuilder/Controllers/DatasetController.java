@@ -56,5 +56,10 @@ public class DatasetController {
         datasetsRepository.deleteById(id);
         return "Deleted";
     }
+
+    @GetMapping(path = "/test")
+    public @ResponseBody String Test() {
+        return "This is working";
+    }
 }
 

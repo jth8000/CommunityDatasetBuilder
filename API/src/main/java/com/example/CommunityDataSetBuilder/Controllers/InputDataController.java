@@ -50,6 +50,18 @@ public class InputDataController {
         return inputDataRepository.findAll();
     }
 
+    @GetMapping(path="/by-feature/{id}")
+    public @ResponseBody
+    Optional<InputData> GetByFeatureId (@RequestParam int id) {
+        return inputDataRepository.findByFeatureId(id);
+    }
+
+    @GetMapping(path="/by-group/{id}")
+    public @ResponseBody
+    Optional<InputData> GetByDataGroupId (@RequestParam int id) {
+        return inputDataRepository.findByDataGroupId(id);
+    }
+
     @DeleteMapping(path="/delete/{id}")
     public @ResponseBody String DeleteById(@RequestParam int id) {
         inputDataRepository.deleteById(id);

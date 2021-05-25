@@ -52,4 +52,30 @@ public class LabelController {
         labelRepository.deleteById(id);
         return "Deleted";
     }
+
+    @GetMapping(path="/by-group/{id}")
+    public @ResponseBody
+    Optional<Label> GetByDataGroupId (@RequestParam int id) {
+        return labelRepository.findByDataGroupId(id);
+    }
+
+    @PostMapping(path="/add-up-vote")
+    public @ResponseBody int AddUpVote(@RequestParam int labelId) {
+        Optional<Label> l = labelRepository.findById(labelId);
+        l.ifPresent(label -> {
+            label.upVotes++;
+            labelRepository.save(label);
+        });
+        return l.map(label -> label.upVotes).orElse(0);
+    }
+
+    @PostMapping(path="/remove-up-vote")
+    public @ResponseBody int RemoveUpVote(@RequestParam int labelId) {
+        Optional<Label> l = labelRepository.findById(labelId);
+        l.ifPresent(label -> {
+            label.upVotes--;
+            labelRepository.save(label);
+        });
+        return l.map(label -> label.upVotes).orElse(0);
+    }
 }

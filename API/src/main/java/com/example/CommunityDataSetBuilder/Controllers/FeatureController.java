@@ -50,6 +50,12 @@ public class FeatureController {
         return featureRepository.findAll();
     }
 
+    @GetMapping(path="/by-dataset/{id}")
+    public @ResponseBody
+    Optional<Feature> GetByDataSetId (@RequestParam int id) {
+        return featureRepository.findByDatasetId(id);
+    }
+
     @DeleteMapping(path="/delete/{id}")
     public @ResponseBody String DeleteById(@RequestParam int id) {
         featureRepository.deleteById(id);

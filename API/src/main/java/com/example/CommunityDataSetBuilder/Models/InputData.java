@@ -12,6 +12,7 @@ public class InputData {
     @GeneratedValue(strategy= GenerationType.AUTO)
     public int id;
     public int featureId;
+    public int dataGroupId;
     public String data;
 
     public InputData() {
@@ -25,6 +26,13 @@ public class InputData {
     public InputData(int id, int featureId, String data) {
         this.id = id;
         this.featureId = featureId;
+        this.data = data;
+    }
+
+    public InputData(int id, int featureId, int dataGroupId, String data) {
+        this.id = id;
+        this.featureId = featureId;
+        this.dataGroupId = dataGroupId;
         this.data = data;
     }
 }

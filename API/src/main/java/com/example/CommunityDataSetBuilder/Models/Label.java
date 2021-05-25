@@ -11,6 +11,7 @@ public class Label {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     public int id;
+    public int dataGroupId;
     public String data;
     public int upVotes;
 
@@ -28,6 +29,13 @@ public class Label {
 
     public Label(int id, String data, int upVotes) {
         this.id = id;
+        this.data = data;
+        this.upVotes = upVotes;
+    }
+
+    public Label(int id, int dataGroupId, String data, int upVotes) {
+        this.id = id;
+        this.dataGroupId = dataGroupId;
         this.data = data;
         this.upVotes = upVotes;
     }
